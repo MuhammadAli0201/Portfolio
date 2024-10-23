@@ -5,6 +5,7 @@ import { AuthService } from '../../_services/auth.service';
 import { AppUser } from '../../_models/app-user';
 import { debounceTime, filter, Subject, switchMap } from 'rxjs';
 import { NzModalService } from 'ng-zorro-antd/modal';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-signup',
@@ -12,7 +13,7 @@ import { NzModalService } from 'ng-zorro-antd/modal';
   styleUrl: './signup.component.css'
 })
 export class SignupComponent implements OnInit {
-  signupForm: FormGroup;
+  signupForm!: FormGroup;
   loading: boolean = false;
   nameSpan: number = 4;
   inputSpan: number = 19;
@@ -21,12 +22,7 @@ export class SignupComponent implements OnInit {
 
   //LIFE CYCLES
   constructor(private fb: FormBuilder, private authService: AuthService, private nzModal: NzModalService) {
-    this.signupForm = fb.group({
-      userName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.pattern(REGEXPATTERNS.password.pattern)]],
-      phoneNumber: ['']
-    });
+    this.initializeForm();
   }
 
   ngOnInit(): void {
@@ -36,6 +32,15 @@ export class SignupComponent implements OnInit {
   //UI LOGIC  
   get passwordErrorMsg(): string { return REGEXPATTERNS.password.errorMsg; }
   get username(): FormControl { return this.signupForm.controls['userName'] as FormControl };
+
+  initializeForm() {
+    this.signupForm = this.fb.group({
+      userName: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.pattern(REGEXPATTERNS.password.pattern)]],
+      phoneNumber: ['']
+    });
+  }
 
   checkAlreadyExistingUserName() {
     this.username.valueChanges.pipe(
@@ -59,7 +64,7 @@ export class SignupComponent implements OnInit {
     return isValid;
   }
 
-  successModal() {
+  successModal(): void {
     this.nzModal.success({
       nzTitle: 'Success',
       nzContent: 'Yes! Your account has been created successfully.'
@@ -67,22 +72,23 @@ export class SignupComponent implements OnInit {
   }
 
   //DATA
-  signUp = async () => {
+  signUp = async (): Promise<void> => {
     if (!this.validateForm() || this.userNameAlreadyExist) return;
 
     this.loading = true;
     this.errorMsg = '';
-    await this.authService.signup(<AppUser>this.signupForm.value)
-      .then((result) => {
-        this.successModal();
-      })
-      .catch((e) => {
-        console.log(e);
+    try {
+      await this.authService.signup(<AppUser>this.signupForm.value)
+      this.successModal();
+    }
+    catch (e) {
+      if (e instanceof HttpErrorResponse) {
         this.errorMsg = e.error;
-      })
-      .finally(() => {
-        this.loading = false;
-      });
+      }
+    }
+    finally {
+      this.loading = false;
+    }
   }
   //NAVIGATIONS
 }
