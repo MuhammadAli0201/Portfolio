@@ -1,0 +1,61 @@
+<div class="parent-container">
+    <form class="signup-container" [formGroup]="signupForm">
+        <nz-form-item nz-col>
+            <nz-form-label [nzSpan]="nameSpan">User Name</nz-form-label>
+            <nz-form-control [nzSpan]="inputSpan" nzErrorTip="Required">
+                <nz-input-group [nzSuffix]="username_available">
+                    <input  nz-input formControlName="userName">
+                </nz-input-group>
+            </nz-form-control>
+            <ng-template #username_available>
+                <div *ngIf="username.value != ''">
+                    <span *ngIf="!userNameAlreadyExist" nz-icon nz-tooltip nzTooltipTitle="available" nzType="check-circle" [nzTheme]="'twotone'" [nzTwotoneColor]="'green'"></span>
+                    <span *ngIf="userNameAlreadyExist" nz-icon nz-tooltip nzTooltipTitle="already taken" nzType="close-circle" [nzTheme]="'twotone'" [nzTwotoneColor]="'red'"></span>
+                </div>
+              </ng-template>
+        </nz-form-item>
+
+        <nz-form-item nz-col>
+            <nz-form-label [nzSpan]="nameSpan">Email</nz-form-label>
+            <nz-form-control [nzSpan]="inputSpan" [nzErrorTip]="emailError">
+                <input nz-input formControlName="email">
+            </nz-form-control>
+                <ng-template #emailError let-control>
+                    @if (control.errors?.['required']) {
+                      Required.
+                    }
+                    @if (control.errors?.['email']) {
+                      Incorrect email format!
+                    }
+            </ng-template>
+        </nz-form-item>
+
+        <nz-form-item nz-col>
+            <nz-form-label [nzSpan]="nameSpan">Password</nz-form-label>
+            <nz-form-control [nzSpan]="inputSpan" [nzErrorTip]="passwordError">
+                <input nz-input type="password" formControlName="password">
+            </nz-form-control>
+            <ng-template #passwordError let-control>
+                @if (control.errors?.['required']) {
+                  Required.
+                }
+                @if (control.errors?.['pattern']) {
+                  {{passwordErrorMsg}}
+                }
+        </ng-template>
+        </nz-form-item>
+
+        <nz-form-item nz-col>
+            <nz-form-label [nzSpan]="nameSpan">Phone Number</nz-form-label>
+            <nz-form-control [nzSpan]="inputSpan" nzErrorTip="Required">
+                <input nz-input type="text" formControlName="phoneNumber">
+            </nz-form-control>
+        </nz-form-item>
+        
+        <p class="text-danger" *ngIf="errorMsg != ''">*{{errorMsg}}</p>
+
+        <div nz-flex nzJustify="end" style="margin-right: 4%;">
+            <button [nzLoading]="loading" (click)="signUp()" type="submit" nz-button nzType="primary">Sign Up</button>
+        </div>
+    </form>
+</div>
