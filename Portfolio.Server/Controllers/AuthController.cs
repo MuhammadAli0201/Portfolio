@@ -30,12 +30,6 @@ namespace Portfolio.Server.Controllers
             this._configuration = configuration;
         }
 
-        /// <summary>
-        /// Used To Sign Up a new User.
-        /// </summary>
-        /// <param name="userSignUpDTO">DTO containing user related information</param>
-        /// <returns>Conflict if user already exist</returns>
-        /// <returns>Success if user is created</returns>
         [AllowAnonymous]
         [HttpPost("signup")]
         public async Task<IActionResult> SignUp(AppUserDTO appUser)
@@ -64,12 +58,6 @@ namespace Portfolio.Server.Controllers
 
         }
 
-        /// <summary>
-        /// Used To Sign Up a new User.
-        /// </summary>
-        /// <param name="userSignUpDTO">DTO containing user related information</param>
-        /// <returns>Conflict if user already exist</returns>
-        /// <returns>Success if user is created</returns>
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserLoginDTO userLoginDTO)
@@ -91,7 +79,7 @@ namespace Portfolio.Server.Controllers
                 var audience = jwtSettings["Audience"];
                 var secretKey = jwtSettings["SecretKey"];
 
-                ITokenStrategy jwtToken = new JWTTokenStrategy(issuer, audience);
+                ITokenService jwtToken = new JWTTokenService(issuer, audience);
                 string token = jwtToken.GenerateToken(secretKey, DateTime.Now.AddHours(1));
                 if (token.IsNullOrEmpty())
                    return BadRequest("Oops. Unable to generate token for you. Please try again later.");
@@ -117,14 +105,7 @@ namespace Portfolio.Server.Controllers
             }
         }
 
-        /// <summary>
-        /// Used To Update a user password.
-        /// </summary>
-        /// <param name="userUpdatePassword">DTO containing user id, user old and new passwords.</param>
-        /// <returns>NotFound if user doesn't exist</returns>
-        /// <returns>Success if password is updated</returns>
-        /// <returns>Bad Request if model is not valid or any error occurs while updating password</returns>
-        [HttpPost(nameof(UpdatePassword))]
+        [HttpPost("update-password")]
         public async Task<IActionResult> UpdatePassword(string userId, string oldPassword, string newPassword)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -141,12 +122,6 @@ namespace Portfolio.Server.Controllers
             else return BadRequest("Oops. Something unexpected occurs while updating password.");            
         }
 
-        /// <summary>
-        /// Used To check existing username.
-        /// </summary>
-        /// <param name="userName"></param>
-        /// <returns>true if username exist</returns>
-        /// <returns>false if username doesn't exist</returns>
         [AllowAnonymous]
         [HttpGet("username/{userName}")]
         public async Task<IActionResult> IsUsernameExist(string userName)
@@ -156,15 +131,7 @@ namespace Portfolio.Server.Controllers
             else return Ok(true);
         }
 
-        /// <summary>
-        /// Used To Update a user password.
-        /// </summary>
-        /// <param name="appUser">DTO containing updated information of user.</param>
-        /// <returns>NotFound if user doesn't exist</returns>
-        /// <returns>Success if user is updated</returns>
-        /// <returns>Bad Request if model is not validated. or if there is issue in updation of user.</returns>
-        //[Authorize(Policy = "AllUsers")]
-        [HttpPut(nameof(UpdateUser))]
+        [HttpPut("update-user")]
         public async Task<IActionResult> UpdateUser(AppUser appUser)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -183,14 +150,6 @@ namespace Portfolio.Server.Controllers
             return BadRequest("Oops. Something unexpected occurs. Failed to update user.");            
         }
 
-        /// <summary>
-        /// Used To add address against user.
-        /// </summary>
-        /// <param name="userAddressDTO">DTO containing information of user address.</param>
-        /// <param name="userId"></param>
-        /// <returns>NotFound if user doesn't exist</returns>
-        /// <returns>Success if user address is updated</returns>
-        /// <returns>Bad Request if model is not validated. or if there is issue in updation of user address.</returns>
         //[Authorize(Policy = "AllUsers")]
         //[HttpPut(nameof(AddUserAddress))]
         //public async Task<IActionResult> AddUserAddress(UserAddressDTO userAddressDTO)
@@ -214,7 +173,6 @@ namespace Portfolio.Server.Controllers
         //    var result = await _manageUserAddressService.AddAsync(address);
         //    if (result != null)
         //    {
-        //        _logger.LogInformation("user address added successfully.");
         //        return Ok(new ResponseDTO<UserAddressDTO>
         //        {
         //            Message = "User address Added Successfully.",
@@ -223,7 +181,6 @@ namespace Portfolio.Server.Controllers
         //    }
         //    else
         //    {
-        //        _logger.LogInformation("Oops. Something unexpected occurs. Failed to add user address.");
         //        return BadRequest("Oops. Something unexpected occurs. Failed to add user address.");
         //    }
         //}

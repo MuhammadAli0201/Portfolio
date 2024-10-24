@@ -4,9 +4,11 @@ import { SignupComponent } from './user/signup/signup.component';
 import { PATHS } from './_constants/paths';
 import { LoginComponent } from './user/login/login.component';
 import { UserComponent } from './user/user.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
-  { path: PATHS.default, pathMatch: 'full', redirectTo: PATHS.user },
+  { path: PATHS.default, pathMatch: 'full', redirectTo: PATHS.welcome },
+  { path: PATHS.welcome, component: WelcomeComponent },
   {
     path: PATHS.user, component: UserComponent,
     children: [

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { REGEXPATTERNS } from '../../_constants/regex-patterns';
 import { AuthService } from '../../_services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MagicString } from '../../_models/magic-string';
 
 @Component({
   selector: 'app-login',
@@ -53,7 +54,7 @@ export class LoginComponent implements OnInit {
       this.errorMsg = '';
       this.loading = true;
       var result = await this.authService.login(this.loginForm.value);
-      localStorage.setItem("jwtToken", result.accessToken);
+      localStorage.setItem(MagicString.jwtToken, result.accessToken);
     }
     catch (e) {
       if (e instanceof HttpErrorResponse) {

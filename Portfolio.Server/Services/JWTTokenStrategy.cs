@@ -5,36 +5,23 @@ using System.Text;
 
 namespace Portfolio.Bussiness.Strategies
 {
-    public interface ITokenStrategy
+    public interface ITokenService
     {
-        /// <summary>
-        /// It will generate a token containing information against user.
-        /// </summary>
-        /// <param name="secretKey">A key which is used to encode the user's data</param>
-        /// <param name="expiry">In how many time it will expires</param>
         public string GenerateToken(string secretKey, DateTime expiry);
 
-        /// <summary>
-        /// It will generate a token That will be used to regenerate token.
-        /// </summary>
         public string GenerateRefreshToken();
     }
 
-    public class JWTTokenStrategy : ITokenStrategy
+    public class JWTTokenService : ITokenService
     {
         private string Issuer { get; }
         private string Audience { get; }
-        public JWTTokenStrategy(string issuer, string audience)
+        public JWTTokenService(string issuer, string audience)
         {
             Issuer = issuer;
             Audience = audience;
         }
 
-        /// <summary>
-        /// It will generate a token containing information against user.
-        /// </summary>
-        /// <param name="secretKey">A key which is used to encode the user's data</param>
-        /// <param name="expiry">In how many time it will expires</param>
         public string GenerateToken(string secretKey, DateTime expiry)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
@@ -56,9 +43,6 @@ namespace Portfolio.Bussiness.Strategies
             return tokenHandler.WriteToken(token);
         }
 
-        /// <summary>
-        /// It will generate a token That will be used to regenerate token.
-        /// </summary>
         public string GenerateRefreshToken()
         {
             var randomNumber = new byte[32];

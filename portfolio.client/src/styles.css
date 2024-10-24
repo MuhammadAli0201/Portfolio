@@ -1,4 +1,18 @@
-.text-danger
-{
+.text-danger {
     color: red;
+}
+
+.about-parent-container {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(42 42 42);
+    border-radius: 15px;
+}
+
+.app-primary-text-color {
+    color: rgb(210, 184, 36);
+}
+
+.app-primary-bg-color {
+    background-color: rgb(87, 85, 85)
 }

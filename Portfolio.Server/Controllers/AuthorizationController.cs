@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -11,35 +10,21 @@ namespace Portfolio.Server.Controllers
     [Route("api/[controller]")]
     public class AuthorizationController : ControllerBase
     {
-        private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AuthorizationController(SignInManager<AppUser> signInManager,
-            UserManager<AppUser> userManager,
-            RoleManager<IdentityRole> roleManager,
-            ILogger<AuthorizationController> logger
+        public AuthorizationController(UserManager<AppUser> userManager,
+            RoleManager<IdentityRole> roleManager
             )
         {
-            this._signInManager = signInManager;
             this._userManager = userManager;
             this._roleManager = roleManager;
         }
 
-        /// <summary>
-        /// Used Create a role to user.
-        /// </summary>
-        /// <param name="roleName">role name</param>
-        /// <returns>Conflict if role already exist</returns>
-        /// <returns>Success if role is created</returns>
-        /// <returns>BadRequest if any error occured is creation</returns>
-        [HttpPost(nameof(CreateRole))]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateRole(string roleName)
         {
-            if (roleName.IsNullOrEmpty())
-            {
-                return Forbid("role name is required");
-            }
+            if (roleName.IsNullOrEmpty()) return Forbid("role name is required");
 
             var roleExists = await _roleManager.RoleExistsAsync(roleName);
             if (!roleExists)
@@ -54,15 +39,7 @@ namespace Portfolio.Server.Controllers
             }
         }
 
-        /// <summary>
-        /// Used Assign a role to user.
-        /// </summary>
-        /// <param name="roleName">role name</param>
-        /// <param name="userId">unique id of a user</param>
-        /// <returns>BadRequest if failed to assign user</returns>
-        /// <returns>Success if role is assigned to user</returns>
-        /// <returns>NotFound if user doesn't exist or role doesn't exist</returns>
-        [HttpPost(nameof(AssignRoleToUser))]
+        [HttpPost("assign")]
         public async Task<IActionResult> AssignRoleToUser(string userId, string roleName)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -81,15 +58,7 @@ namespace Portfolio.Server.Controllers
             else return BadRequest("Opps. Failed to assign role.");
         }
 
-        /// <summary>
-        /// Used Remove a user from a role.
-        /// </summary>
-        /// <param name="userId">user unique id</param>
-        /// <param name="roleName">role name</param>
-        /// <returns>BadRequest if failed to remove user from a role</returns>
-        /// <returns>Success if role is removed to user</returns>
-        /// <returns>NotFound if user doesn't exist or role doesn't exist</returns>
-        [HttpPost(nameof(RemoveUserFrom))]
+        [HttpPost("remove")]
         public async Task<IActionResult> RemoveUserFrom(string userId, string roleName)
         {
             var user = await _userManager.FindByIdAsync(userId);
@@ -105,14 +74,7 @@ namespace Portfolio.Server.Controllers
 
         }
 
-        /// <summary>
-        /// Used Remove a user from a role.
-        /// </summary>
-        /// <param name="roleName">role name</param>
-        /// <returns>BadRequest if failed to delete user</returns>
-        /// <returns>Success if role is deleted</returns>
-        /// <returns>NotFound if role doesn't exist</returns>
-        [HttpDelete(nameof(DeleteRole))]
+        [HttpDelete("delete")]
         public async Task<IActionResult> DeleteRole(string roleName)
         {
             var role = await _roleManager.FindByNameAsync(roleName);
@@ -126,24 +88,14 @@ namespace Portfolio.Server.Controllers
 
         }
 
-        /// <summary>
-        /// Used to get all roles.
-        /// </summary>
-        /// <returns>Success. return all roles</returns>
-        [HttpGet(nameof(GetAllRoles))]
+        [HttpGet("get-all")]
         public async Task<IActionResult> GetAllRoles()
         {
             var roles = await _roleManager.Roles.ToListAsync();
             return Ok(roles);
         }
 
-        /// <summary>
-        /// Used To get all user against a role.
-        /// </summary>
-        /// <param name="roleName">role name</param>
-        /// <returns>Success. return all Users</returns>
-        /// <returns>NotFounf.If role not found</returns>
-        [HttpGet(nameof(GetUsersAgainstRole))]
+        [HttpGet("get-user-by-role")]
         public async Task<IActionResult> GetUsersAgainstRole(string roleName)
         {
             var role = await _roleManager.FindByNameAsync(roleName);
@@ -156,43 +108,24 @@ namespace Portfolio.Server.Controllers
             return Ok(users);
         }
 
-        /// <summary>
-        /// Used To get all roles against user using his id.
-        /// </summary>
-        /// <param name="userId">role name</param>
-        /// <returns>Success. return roles</returns>
-        /// <returns>NotFound.If user not found</returns>
-        [HttpGet(nameof(GetRolesAgainstUser))]
+        [HttpGet("get-role-by-user")]
         public async Task<IActionResult> GetRolesAgainstUser(string userId)
         {
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
-            {
                 return NotFound($"Oops. User against '{userId}' not found.");
-            }
 
             var roles = await _userManager.GetRolesAsync(user);
             return Ok(roles);
         }
 
-        /// <summary>
-        /// Used to update user against roles.
-        /// </summary>
-        /// <param name="userId">role name</param>
-        /// <param name="appRoleNames">all role name</param>
-        /// <returns>Success. return User with updated role</returns>
-        /// <returns>Conflict.If a user is already in roles and there is no new changes</returns>
-        /// <returns>Not Found.If user is not Found.</returns>
-        [HttpPost(nameof(UpdateUserRole))]
+        [HttpPost("update-user-role")]
         public async Task<IActionResult> UpdateUserRole(string userId, List<string> appRoleNames)
         {
+            List<string> userUpdatedInRoles = new List<string> { };
             var user = await _userManager.FindByIdAsync(userId);
             if (user == null)
-            {
                 return NotFound($"Oops. User not found.");
-            }
-
-            List<string> userUpdatedInRoles = new List<string> { };
 
             var rolesAgainstUser = await _userManager.GetRolesAsync(user);
             var uniqueRoles = rolesAgainstUser.Except(appRoleNames).Union(appRoleNames.Except(rolesAgainstUser));
