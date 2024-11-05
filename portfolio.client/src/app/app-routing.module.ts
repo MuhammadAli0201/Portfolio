@@ -4,11 +4,11 @@ import { SignupComponent } from './user/signup/signup.component';
 import { PATHS } from './_constants/paths';
 import { LoginComponent } from './user/login/login.component';
 import { UserComponent } from './user/user.component';
-import { WelcomeComponent } from './welcome/welcome.component';
+import { AboutComponent } from './about/about.component';
 
 const routes: Routes = [
-  { path: PATHS.default, pathMatch: 'full', redirectTo: PATHS.welcome },
-  { path: PATHS.welcome, component: WelcomeComponent },
+  { path: PATHS.default, pathMatch: 'full', redirectTo: PATHS.about },
+  { path: PATHS.about, component: AboutComponent },
   {
     path: PATHS.user, component: UserComponent,
     children: [

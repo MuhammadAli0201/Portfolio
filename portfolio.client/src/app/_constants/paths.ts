@@ -1,8 +1,11 @@
 export const PATHS =
 {
     default:'',
-    welcome:'welcome',
     user : "u",
     signup : "signup",
     login : "login",
+    home: "h",
+    about: "about",
+    projects:"projects",
+    experience: "experience"
 }

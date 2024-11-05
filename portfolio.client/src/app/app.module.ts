@@ -18,9 +18,8 @@ import { AntdModule } from './antd.module';
 import { LoginComponent } from './user/login/login.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { JwtInterceptor } from './jwt-interceptor.service';
-import { WelcomeComponent } from './welcome/welcome.component';
 import { HomeComponent } from './home/home.component';
-import { AboutComponent } from './about/about.component';
+import { GeneralInformationComponent } from './general-information/general-information.component';
 
 registerLocaleData(en);
 
@@ -30,9 +29,8 @@ registerLocaleData(en);
     UserComponent,
     LoginComponent,
     SignupComponent,
-    WelcomeComponent,
     HomeComponent,
-    AboutComponent
+    GeneralInformationComponent
   ],
   imports: [
     BrowserModule,

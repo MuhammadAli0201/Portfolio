@@ -14,5 +14,9 @@
 }
 
 .app-primary-bg-color {
+    background-color: rgb(210, 184, 36);
+}
+
+.app-secondary-bg-color {
     background-color: rgb(87, 85, 85)
 }
