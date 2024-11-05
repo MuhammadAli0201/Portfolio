@@ -1,0 +1,6 @@
+<div class="project-parent">
+    <app-project-display *ngFor="let p of projects" [title]="p.title" [imgUrl]="p.imageUrl"
+        [description]="p.description" [imgHeight]="p.imgHeight!" [imgWidth]="p.imgWidth!" [invert]="p.invert"
+        [technologies]="p.technologies">
+    </app-project-display>
+</div>

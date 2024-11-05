@@ -1,22 +1,28 @@
-.text-danger {
-    color: red;
-}
+/* @font-face { 
+    font-family: 'Roboto'; 
+    font-weight: bold; 
+    src: url('../public/Roboto/Roboto-Bold.ttf'); 
+} 
 
-.about-parent-container {
-    height: 100%;
-    width: 100%;
-    background-color: rgb(42 42 42);
-    border-radius: 15px;
-}
+@font-face { 
+    font-family: 'Roboto'; 
+    font-style: italic; 
+    src: url('../public/Roboto/Roboto-Italic.ttf'); 
+} 
 
-.app-primary-text-color {
-    color: rgb(210, 184, 36);
-}
+@font-face { 
+    font-family: 'Roboto'; 
+    font-weight: bold; 
+    font-style: italic; 
+    src: url('../public/Roboto/Roboto-BoldItalic.ttf'); 
+} 
 
-.app-primary-bg-color {
-    background-color: rgb(210, 184, 36);
-}
+@font-face { 
+    font-family: 'Roboto'; 
+    font-style: normal; 
+    src: url('../public/Roboto/Roboto-Regular.ttf'); 
+} 
 
-.app-secondary-bg-color {
-    background-color: rgb(87, 85, 85)
-}
+body {
+    font-family: 'Roboto', 'sans-serif';
+} */

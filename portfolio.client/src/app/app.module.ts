@@ -18,8 +18,12 @@ import { AntdModule } from './antd.module';
 import { LoginComponent } from './user/login/login.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { JwtInterceptor } from './jwt-interceptor.service';
-import { HomeComponent } from './home/home.component';
-import { GeneralInformationComponent } from './general-information/general-information.component';
+import { WelcomeComponent } from './welcome/welcome.component';
+import { TagComponent } from './_components/tag/tag.component';
+import { ProjectsComponent } from './projects/projects.component';
+import { ProjectDisplayComponent } from './_components/project-display/project-display.component';
+import { AboutComponent } from './about/about.component';
+import { SocialsComponent } from './socials/socials.component';
 
 registerLocaleData(en);
 
@@ -29,8 +33,12 @@ registerLocaleData(en);
     UserComponent,
     LoginComponent,
     SignupComponent,
-    HomeComponent,
-    GeneralInformationComponent
+    WelcomeComponent,
+    TagComponent,
+    ProjectsComponent,
+    ProjectDisplayComponent,
+    AboutComponent,
+    SocialsComponent
   ],
   imports: [
     BrowserModule,
