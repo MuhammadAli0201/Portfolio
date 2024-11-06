@@ -1,35 +1,5 @@
-.parent-background
-{
-    height: 90vh;
-    width: 100%; 
-    background-color: rgb(33, 33, 33);
-    position: absolute;
-    z-index: -1;
-}
 
-.content
-{
-    z-index: 1;
-    padding: 20px;
-    color: white;
-}
 
-.intro
-{
-    margin: calc(100vh - 84vh);    
-}
-
-.socials
-{
-    position: absolute;
-    right: 0;
-    top: 0;
-    z-index: 2;
-    width: 20%;
-    background-color: rgb(185, 184, 184);
-    border-bottom-left-radius: 10px;
-}
-
-.app-proj{
-    margin-top: 4%;
+.app-proj {
+    margin-top: 12%;
 }

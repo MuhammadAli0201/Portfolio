@@ -1,33 +1,24 @@
-<div *ngIf="!invert" nz-row style="height: 200px; width: 98%; margin: 100px 10px;">
-    <div nz-col nzOffset="1" nzSpan="7" class="h-100">
-        <img [src]="imgUrl" [ngStyle]="{'height' : imgHeight ?? '100%', 'width' : imgWidth}">
+<div nz-row style="height: 200px; width: 98%; margin: 100px 10px;">
+    <div nz-col nzOffset="1" [nzSpan]="invert ? 13 : 7" [class]="invert ? '' : 'h-100'">
+        <ng-container *ngTemplateOutlet="invert ? detail : image"></ng-container>
     </div>
-    <div nz-col nzSpan="14">
-        <div nz-row>
-            <h4>{{title}}</h4>
-            <div class="ml-3" style="margin-top: 1px;">
-                <nz-tag *ngFor="let tech of technologies" [nzColor]="getRandomColor()">{{tech}}</nz-tag>
-            </div>
-        </div>
-        <div class="mt-3 text-justify">
-            <span>{{description}}</span>
-        </div>
+    <div nz-col [nzOffset]="invert ? 5 : 0" [nzSpan]="invert ? 3 : 14" [class]="invert ? 'h-100' : ''">
+        <ng-container *ngTemplateOutlet="invert ? image : detail"></ng-container>
     </div>
 </div>
 
-<div *ngIf="invert" nz-row style="height: 200px; width: 98%; margin:100px 10px;">
-    <div nz-col nzOffset="1" nzSpan="13">
-        <div nz-row>
-            <h4>{{title}}</h4>
-            <div class="ml-3" style="margin-top: 1px;">
-                <nz-tag *ngFor="let tech of technologies" [nzColor]="getRandomColor()">{{tech}}</nz-tag>
-            </div>
-        </div>
-        <div class="mt-3 text-justify">
-            <span>{{description}}</span>
+<ng-template #image>
+    <img [src]="imgUrl" [ngStyle]="{'height' : imgHeight ?? '100%', 'width' : imgWidth}">
+</ng-template>
+
+<ng-template #detail>
+    <div nz-row>
+        <h4>{{title}}</h4>
+        <div class="ml-3" style="margin-top: 1px;">
+            <nz-tag *ngFor="let tech of technologies" [nzColor]="getRandomColor()">{{tech}}</nz-tag>
         </div>
     </div>
-    <div nz-col nzOffset="5" nzSpan="3" class="h-100">
-        <img [src]="imgUrl" [ngStyle]="{'height' : imgHeight ?? '100%', 'width' : imgWidth}">
+    <div class="mt-3 text-justify">
+        <span>{{description}}</span>
     </div>
-</div>
+</ng-template>

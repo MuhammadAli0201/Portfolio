@@ -1,0 +1,10 @@
+.socials {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 8px;
+    z-index: 2;
+    width: 20%;
+    background-color: rgb(185, 184, 184);
+    border-bottom-left-radius: 10px;
+}

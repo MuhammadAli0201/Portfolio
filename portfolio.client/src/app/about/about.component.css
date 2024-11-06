@@ -1,0 +1,14 @@
+.parent-background
+{
+    height: 560px;
+    width: 100%; 
+    background-color: rgb(33, 33, 33);
+    position: absolute;
+    z-index: -1;
+}
+
+.content
+{
+    z-index: 1;
+    color: white;
+}
