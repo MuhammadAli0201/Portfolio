@@ -1,1 +1,30 @@
-<p>contact works!</p>
+<div nz-row>
+    <div nz-col nzSpan="8"></div>
+    <div nz-col nzOffset="4" nzSpan="12" class="contact-form">
+        <div class="w-100" nz-flex nzAlign="center" nzJustify="center">
+            <h4>Contact Me</h4>
+        </div>
+        <form class="mt-5" nz-form>
+            <nz-form-item nz-row>
+                <nz-form-label nz-col nzLabelAlign="left" nzSpan="4" nzRequired>Email</nz-form-label>
+                <nz-form-control nz-col nzSpan="20">
+                    <input nz-col nz-input />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row>
+                <nz-form-label nz-col nzLabelAlign="left" nzSpan="4" nzRequired>Subject</nz-form-label>
+                <nz-form-control nz-col nzSpan="20">
+                    <input nz-col nz-input />
+                </nz-form-control>
+            </nz-form-item>
+            <nz-form-item nz-row>
+                <nz-form-label nz-col nzLabelAlign="left" nzSpan="4" nzRequired>Body</nz-form-label>
+                <nz-form-control nz-col nzSpan="20">
+                    <textarea nz-col nz-input [nzAutosize]="{ minRows: 10, maxRows: 10}"></textarea>
+                </nz-form-control>
+            </nz-form-item>
+
+            <div nz-row nzJustify="end"><button nz-button nzType="primary">Send</button></div>
+        </form>
+    </div>
+</div>

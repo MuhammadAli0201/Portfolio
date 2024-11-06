@@ -24,6 +24,7 @@ import { ProjectsComponent } from './projects/projects.component';
 import { ProjectDisplayComponent } from './_components/project-display/project-display.component';
 import { AboutComponent } from './about/about.component';
 import { SocialsComponent } from './socials/socials.component';
+import { ContactComponent } from './contact/contact.component';
 
 registerLocaleData(en);
 
@@ -38,7 +39,8 @@ registerLocaleData(en);
     ProjectsComponent,
     ProjectDisplayComponent,
     AboutComponent,
-    SocialsComponent
+    SocialsComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,7 @@ registerLocaleData(en);
     NzMenuModule,
     FormsModule,
     AntdModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },

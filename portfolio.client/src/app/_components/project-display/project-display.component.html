@@ -1,8 +1,8 @@
-<div nz-row style="height: 200px; width: 98%; margin: 100px 10px;">
-    <div nz-col nzOffset="1" [nzSpan]="invert ? 13 : 7" [class]="invert ? '' : 'h-100'">
+<div nz-row style="height: 200px; width: 100%; margin: 100px 0px">
+    <div nz-col [nzSpan]="invert ? 13 : 10" [class]="invert ? '' : 'h-100'">
         <ng-container *ngTemplateOutlet="invert ? detail : image"></ng-container>
     </div>
-    <div nz-col [nzOffset]="invert ? 5 : 0" [nzSpan]="invert ? 3 : 14" [class]="invert ? 'h-100' : ''">
+    <div nz-col [nzOffset]="invert ? 7 : 0" [nzSpan]="invert ? 4  : 14" [class]="invert ? 'h-100' : ''">
         <ng-container *ngTemplateOutlet="invert ? image : detail"></ng-container>
     </div>
 </div>

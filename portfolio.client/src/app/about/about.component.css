@@ -5,6 +5,8 @@
     background-color: rgb(33, 33, 33);
     position: absolute;
     z-index: -1;
+    left: 0;
+    top: 0;
 }
 
 .content
