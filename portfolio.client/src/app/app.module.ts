@@ -1,4 +1,4 @@
-import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -19,7 +19,6 @@ import { LoginComponent } from './user/login/login.component';
 import { SignupComponent } from './user/signup/signup.component';
 import { JwtInterceptor } from './jwt-interceptor.service';
 import { WelcomeComponent } from './welcome/welcome.component';
-import { TagComponent } from './_components/tag/tag.component';
 import { ProjectsComponent } from './projects/projects.component';
 import { ProjectDisplayComponent } from './_components/project-display/project-display.component';
 import { AboutComponent } from './about/about.component';
@@ -35,7 +34,6 @@ registerLocaleData(en);
     LoginComponent,
     SignupComponent,
     WelcomeComponent,
-    TagComponent,
     ProjectsComponent,
     ProjectDisplayComponent,
     AboutComponent,
