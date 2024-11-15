@@ -15,19 +15,21 @@
                 (click)="slideImagesToLeft()"></span>
             <div #techStack class="tech-stack" nz-flex [nzGap]="techImgGap">
                 <img class="techs pointer-event-all" *ngFor="let i of getVisibleImages()" [src]="i.path" nz-tooltip
-                    [nzTooltipTitle]="i.tooltip" [nzTooltipColor]="i.tooltipColor" [width]="techImgWidth">
+                    [nzTooltipTitle]="i.tooltip" [nzTooltipColor]="i.tooltipColor">
             </div>
             <span *ngIf="isRightButtonVisible()" class="pointer-event-all" nz-icon nzType="arrow-right"
                 nzTheme="outline" (click)="slideImagesToRight()"></span>
         </div>
     </div>
+
     <div class="mt-3" nz-col [nzOffset]="4" [nzSpan]="8">
         <div class="h-100 mb-5" nz-flex nzAlign="center" nzJustify="center">
             <img class="mb-5" style="height: 50vh;" src="images/coder.svg">
         </div>
     </div>
+
     <div class="projects-btn pointer-event-all">
-        <button class="btn btn-large primary-bg-color text-white">
+        <button (click)="scrollTo100vh()" class="btn btn-large primary-bg-color text-white">
             Projects
             <span nz-icon nzType="arrow-down"></span>
         </button>

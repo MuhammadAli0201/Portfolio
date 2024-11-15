@@ -1,6 +1,4 @@
-<!-- <div class="project-parent">
-    <app-project-display *ngFor="let p of projects; let i = index" [title]="p.title" [imgUrl]="p.imageUrl"
-        [description]="p.description" [imgHeight]="p.imgHeight!" [imgWidth]="p.imgWidth!" [invert]="i % 2 == 0 ? false : true"
-        [technologies]="p.technologies">
+<div class="project-parent">
+    <app-project-display *ngFor="let p of projects; let i = index" [project]="p" [invert]="i % 2 == 0 ? false : true">
     </app-project-display>
-</div> -->
+</div>

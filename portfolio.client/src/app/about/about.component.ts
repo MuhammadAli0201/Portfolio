@@ -1,35 +1,24 @@
-import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { MatterJs } from './Matter';
-
-interface Image {
-  path: string,
-  tooltip: string,
-  tooltipColor: string
-}
+import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Image } from '../_models/image';
+import { MatterTs } from '../_matter/matter-ts';
 
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
   styleUrl: './about.component.css'
 })
-export class AboutComponent implements OnInit, AfterViewInit {
-
+export class AboutComponent implements OnInit {
   @ViewChild('matterContainer', { static: true }) matterContainer!: ElementRef;
   @ViewChild('techStack', { static: true }) techStack!: ElementRef;
-  displayImagesCount: number = 1;
+  displayImagesCount!: number;
   startIndex: number = 0;
-  techImgWidth: number = 40;
-  techImgGap: number = 50;
+  techImgGap: number = 40;
 
+  //LIFE CYCLES
+  constructor(private cd: ChangeDetectorRef) { }
   ngOnInit(): void {
-    MatterJs.gyro(this.matterContainer.nativeElement, "images/html.png");
-  }
-
-  ngAfterViewInit(): void {
-    Promise.resolve().then(() => {
-      let techStackDivWidth = this.techStack.nativeElement.clientWidth;
-      this.displayImagesCount = Math.ceil(techStackDivWidth / (this.techImgWidth + this.techImgGap));
-    });
+    MatterTs.gyro(this.matterContainer.nativeElement);
+    Promise.resolve().then(() => this.calculateDisplayImagesCount());
   }
 
   imagePaths: Image[] = [
@@ -48,6 +37,13 @@ export class AboutComponent implements OnInit, AfterViewInit {
   isLeftButtonVisible = (): boolean => this.startIndex > 0;
   isRightButtonVisible = (): boolean => this.displayImagesCount < this.imagePaths.length;
 
+  calculateDisplayImagesCount = () => {
+    let techStackDiv = this.techStack.nativeElement;
+    let techStackDivWidth = techStackDiv.clientWidth;
+    let techImageHeight = techStackDiv.clientHeight;
+    this.displayImagesCount = Math.ceil(techStackDivWidth / (techImageHeight + this.techImgGap));
+  }
+
   slideImagesToLeft() {
     if (this.startIndex > 0) {
       this.startIndex--;
@@ -59,5 +55,10 @@ export class AboutComponent implements OnInit, AfterViewInit {
       this.startIndex++;
       this.displayImagesCount++;
     }
+  }
+
+  scrollTo100vh() {
+    const viewportHeight = window.innerHeight;
+    window.scrollTo({ top: viewportHeight, behavior: 'smooth' });
   }
 }

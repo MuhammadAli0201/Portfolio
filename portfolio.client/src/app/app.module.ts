@@ -20,10 +20,12 @@ import { SignupComponent } from './user/signup/signup.component';
 import { JwtInterceptor } from './jwt-interceptor.service';
 import { WelcomeComponent } from './welcome/welcome.component';
 import { ProjectsComponent } from './projects/projects.component';
-import { ProjectDisplayComponent } from './_components/project-display/project-display.component';
+import { ProjectDisplayComponent } from './projects/project-display/project-display.component';
 import { AboutComponent } from './about/about.component';
 import { SocialsComponent } from './socials/socials.component';
 import { ContactComponent } from './contact/contact.component';
+import { FooterComponent } from './footer/footer.component';
+import { HeaderComponent } from './header/header.component';
 
 registerLocaleData(en);
 
@@ -38,7 +40,9 @@ registerLocaleData(en);
     ProjectDisplayComponent,
     AboutComponent,
     SocialsComponent,
-    ContactComponent
+    ContactComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
