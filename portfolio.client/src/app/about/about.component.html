@@ -1,21 +1,29 @@
 <div #matterContainer class="matter-container"></div>
 
 <div nz-row class="content">
-    <div nzJustify="center" nz-col [nzSpan]="11" nz-flex nzVertical>
-        <span class="h">Muhammad Ali</span>
+    <div class="h-100" nzJustify="center" nz-col [nzSpan]="11" nz-flex nzVertical>
+        <span><span class="h">Muhammad </span><span class="h secondary-color">Ali</span></span>
         <span class="sh font-italic">Software Engineer</span>
         <span class="text-justify">I am a dedicated engineer who focuses on creating both websites and mobile apps. I am
-            skilled in building web APIs and integrating them with mobile and web applications. I work with a variety of modern
+            skilled in building web APIs and integrating them with mobile and web applications. I work with a variety of
+            modern
             technologies, enabling me to provide creative solutions that meet my clients' needs and improve user
             experiences.</span>
 
         <div class="mt-5" nz-flex nzWrap="wrap" [nzGap]="40" style="height: auto; width:100%;">
-            <img style="height: 5.4vh;" *ngFor="let i of imagePaths" [src]="i">
+            <img class="techs " *ngFor="let i of imagePaths" [src]="i.path" nz-tooltip [nzTooltipTitle]="i.tooltip"
+                [nzTooltipColor]="i.tooltipColor">
         </div>
     </div>
     <div class="mt-3" nz-col [nzOffset]="4" [nzSpan]="8">
         <div class="h-100" nz-flex nzAlign="center" nzJustify="center">
             <img src="images/coder.svg" style="height: 50vh;">
         </div>
+    </div>
+    <div class="projects-btn">
+        <button nz-button nzType="primary" nzSize="large">
+            Projects
+            <span nz-icon nzType="arrow-down"></span>
+        </button>
     </div>
 </div>

@@ -1,6 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatterJs } from './Matter';
 
+interface Image{
+  path:string,
+  tooltip:string,
+  tooltipColor:string,
+  height?:number,
+  width?:number
+}
+
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
@@ -13,15 +21,15 @@ export class AboutComponent implements OnInit {
     MatterJs.gyro(this.matterContainer.nativeElement, "images/html.png");
   }
 
-  imagePaths: string[] = [
-    'images/html.png',
-    'images/css.png',
-    'images/js.png',
-    'images/dotnet.png',
-    'images/firebase.png',
-    'images/flutter.png',
-    'images/ng zorro.png',
-    'images/sql-server.png',
-    'images/angular.png'
+  imagePaths: Image[] = [
+    {path:'images/dotnet.png',  tooltip:'.NET Core', tooltipColor:'purple'},
+    {path:'images/sql-server.png', tooltip:'SQL Server', tooltipColor:'red'},
+    {path:'images/angular.png', tooltip:'Angular', tooltipColor:'rgb(207, 10, 204)'},
+    {path:'images/ng zorro.png', tooltip:'NG Zorro', tooltipColor:'blue'},
+    {path:'images/html.png', tooltip:'HTML', tooltipColor:'orangered'},
+    {path: 'images/css.png', tooltip:'CSS', tooltipColor: 'blue'},
+    {path: 'images/js.png', tooltip: 'JavaScript', tooltipColor: 'rgb(196, 196, 25)'},
+    {path: 'images/flutter.png', tooltip:'Flutter', tooltipColor: 'skyblue'},
+    {path: 'images/firebase.png', tooltip: 'Firebase', tooltipColor: 'orange'},
   ];
 }
