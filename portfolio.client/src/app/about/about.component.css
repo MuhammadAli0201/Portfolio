@@ -45,21 +45,26 @@ tag {
     user-select: none;
 }
 
-.secondary-color {
-    color: rgb(19, 141, 171);
+.tech-stack {
+    height: auto;
+    overflow: auto;
+    width: 100%;
+}
+
+.tech-stack::-webkit-scrollbar {
+    display: none;
 }
 
 .techs {
     height: 5.4vh;
-    pointer-events: all;
 }
 
 .techs:hover {
+    transform: scale(1.1);
     cursor: pointer;
 }
 
 .projects-btn {
-    pointer-events: all;
     position: absolute;
     bottom: 40px;
 }
@@ -68,7 +73,7 @@ tag {
     position: relative;
 }
 
-.projects-btn button span {
-    position: relative;
-    bottom: 2px;
+.pointer-event-all {
+    pointer-events: all;
+    cursor: pointer;
 }

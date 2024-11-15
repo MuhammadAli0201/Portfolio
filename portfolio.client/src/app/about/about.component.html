@@ -2,7 +2,7 @@
 
 <div nz-row class="content">
     <div class="h-100" nzJustify="center" nz-col [nzSpan]="11" nz-flex nzVertical>
-        <span><span class="h">Muhammad </span><span class="h secondary-color">Ali</span></span>
+        <span><span class="h">Muhammad </span><span class="h primary-color">Ali</span></span>
         <span class="sh font-italic">Software Engineer</span>
         <span class="text-justify">I am a dedicated engineer who focuses on creating both websites and mobile apps. I am
             skilled in building web APIs and integrating them with mobile and web applications. I work with a variety of
@@ -10,18 +10,24 @@
             technologies, enabling me to provide creative solutions that meet my clients' needs and improve user
             experiences.</span>
 
-        <div class="mt-5" nz-flex nzWrap="wrap" [nzGap]="40" style="height: auto; width:100%;">
-            <img class="techs " *ngFor="let i of imagePaths" [src]="i.path" nz-tooltip [nzTooltipTitle]="i.tooltip"
-                [nzTooltipColor]="i.tooltipColor">
+        <div class="mt-5" nz-flex nzGap="small">
+            <span *ngIf="isLeftButtonVisible()" class="pointer-event-all" nz-icon nzType="arrow-left" nzTheme="outline"
+                (click)="slideImagesToLeft()"></span>
+            <div #techStack class="tech-stack" nz-flex [nzGap]="techImgGap">
+                <img class="techs pointer-event-all" *ngFor="let i of getVisibleImages()" [src]="i.path" nz-tooltip
+                    [nzTooltipTitle]="i.tooltip" [nzTooltipColor]="i.tooltipColor" [width]="techImgWidth">
+            </div>
+            <span *ngIf="isRightButtonVisible()" class="pointer-event-all" nz-icon nzType="arrow-right"
+                nzTheme="outline" (click)="slideImagesToRight()"></span>
         </div>
     </div>
     <div class="mt-3" nz-col [nzOffset]="4" [nzSpan]="8">
-        <div class="h-100" nz-flex nzAlign="center" nzJustify="center">
-            <img src="images/coder.svg" style="height: 50vh;">
+        <div class="h-100 mb-5" nz-flex nzAlign="center" nzJustify="center">
+            <img class="mb-5" style="height: 50vh;" src="images/coder.svg">
         </div>
     </div>
-    <div class="projects-btn">
-        <button nz-button nzType="primary" nzSize="large">
+    <div class="projects-btn pointer-event-all">
+        <button class="btn btn-large primary-bg-color text-white">
             Projects
             <span nz-icon nzType="arrow-down"></span>
         </button>
