@@ -24,7 +24,6 @@ export class ProjectDisplayComponent implements OnInit {
     'dodgerblue', 'lavender'
   ];
 
-
   ngOnInit(): void {
     this.techs = this.project.technologies.map((val) => <TechViewModel>{
       title: val,
