@@ -6,5 +6,6 @@
 }
 
 .proj-font {
-    font-size: 1.1vw;
+    /* font-size: 1.1vw; */
+    font-size: clamp(12px, 1.1vw, 28px);
 }

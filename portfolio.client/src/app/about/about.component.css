@@ -36,6 +36,10 @@
     padding-bottom: 4vh;
 }
 
+.description {
+    font-size: clamp(12px, 1.1vw, 28px);
+}
+
 span {
     user-select: none;
     font-size: 1vw;
@@ -76,4 +80,22 @@ tag {
 .pointer-event-all {
     pointer-events: all;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    .h {
+        font-size: 10vw;
+    }
+
+    .sh {
+        font-size: 5vw;
+    }
+
+    .description {
+        display: none;
+    }
+
+    .tech-parent {
+        display: none;
+    }
 }

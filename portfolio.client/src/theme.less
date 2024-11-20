@@ -1,10 +1,36 @@
-
-// Custom Theming for NG-ZORRO
-// For more information: https://ng.ant.design/docs/customize-theme/en
 @import "../node_modules/ng-zorro-antd/ng-zorro-antd.less";
 
-// Override less variables to here
-// View all variables: https://github.com/NG-ZORRO/ng-zorro-antd/blob/master/components/style/themes/default.less
+@url : '../public/OpenSans/OpenSans_Condensed';
+@name : 'Noto';
+
+@font-face {
+    font-family: @name;
+    font-weight: bold;
+    src: url(~"@{url}-Bold.ttf") format('truetype');
+}
+
+@font-face {
+    font-family: @name;
+    font-style: italic;
+    src: url(~'@{url}-Italic.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: @name;
+    font-weight: bold;
+    font-style: italic;
+    src: url(~'@{url}-Bold.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: @name;
+    font-style: normal;
+    src: url(~'@{url}-Regular.ttf') format('truetype');
+}
+
+body {
+    font-family: @name, sans-serif !important;
+}
 
 @primary-color: rgb(19, 141, 171);
 
@@ -17,13 +43,12 @@
     background-color: @primary-color !important;
 }
 
-.primary-border{
+.primary-border {
     border: 3px solid @primary-color;
     border-radius: 15px;
 }
 
-.round-box
-{   
+.round-box {
     border-radius: 10px;
     box-shadow: 1px 1px 4px 4px rgb(215, 210, 210);
 }
