@@ -33,6 +33,53 @@ export class AboutComponent implements OnInit {
     { path: 'images/firebase.png', tooltip: 'Firebase', tooltipColor: 'orange' },
   ];
 
+  techs: { name: string, color: string }[] = [
+    {
+      name: "ASP.NET Core",
+      color: "purple"
+    },
+    {
+      name: "EF Core",
+      color: "darkBlue"
+    },
+    {
+      name: "MS SQL Server",
+      color: "red"
+    },
+    {
+      name: "Angular",
+      color: "red"
+    },
+    {
+      name: "NG-Zorro",
+      color: "blue"
+    },
+    {
+      name: "Html",
+      color: "orange"
+    },
+    {
+      name: "CSS",
+      color: "blue"
+    },
+    {
+      name: "JavaScript",
+      color: "yellow"
+    },
+    {
+      name: "TypeScript",
+      color: "blue"
+    },
+    {
+      name: "Flutter",
+      color: "blue"
+    },
+    {
+      name: "Firebase",
+      color: "orange"
+    }
+  ];
+
   getVisibleImages = (): Image[] => this.imagePaths.slice(this.startIndex, this.displayImagesCount);
   isLeftButtonVisible = (): boolean => this.startIndex > 0;
   isRightButtonVisible = (): boolean => this.displayImagesCount < this.imagePaths.length;
