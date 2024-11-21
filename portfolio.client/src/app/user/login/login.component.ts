@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { REGEXPATTERNS } from '../../_constants/regex-patterns';
-import { AuthService } from '../../_services/auth.service';
+import { AppUserService } from '../../_services/app-user.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { MagicString } from '../../_models/magic-string';
 
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
   errorMsg: string = '';
 
   //LIFE CYCLES
-  constructor(private fb: FormBuilder, private authService: AuthService) { }
+  constructor(private fb: FormBuilder, private authService: AppUserService) { }
 
   ngOnInit(): void {
     this.initializeForm();

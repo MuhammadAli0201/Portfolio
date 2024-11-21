@@ -1,4 +1,3 @@
-export class MagicString
-{
+export class MagicString {
     static jwtToken: string = "jwtToken";
 }

@@ -1,4 +1,6 @@
 import { Component, Input } from '@angular/core';
+import { AppUserService } from '../_services/app-user.service';
+import { Social } from '../_models/social';
 
 @Component({
   selector: 'app-socials',
@@ -7,4 +9,7 @@ import { Component, Input } from '@angular/core';
 })
 export class SocialsComponent {
   @Input() class: string = 'white-color';
+  constructor(private appUserService: AppUserService) { }
+
+  get socials(): Social | undefined { return this.appUserService.user?.social; };
 }

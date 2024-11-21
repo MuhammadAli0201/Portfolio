@@ -3,16 +3,10 @@
 <div nz-row class="content">
     <div class="h-100" nzJustify="center" nz-col [nzXs]="24" [nzSm]="24" [nzMd]="11" nz-flex nzVertical>
         <div nz-flex nzVertical>
-            <span><span class="h font-fam">Muhammad </span><span class="h primary-color font-fam">Ali</span></span>
-            <span class="sh font-italic">Software Engineer</span>
-            <span class="description text-justify">I am a dedicated engineer who focuses on creating both websites and
-                mobile apps.
-                I am
-                skilled in building web APIs and integrating them with mobile and web applications. I work with a
-                variety of
-                modern
-                technologies, enabling me to provide creative solutions that meet my clients' needs and improve user
-                experiences.</span>
+            <span><span class="h font-fam">{{firstName}}</span><span
+                    class="h primary-color font-fam">{{lastName}}</span></span>
+            <span class="sh font-italic">{{appUser.name}}</span>
+            <span class="description text-justify">{{appUser.displayDescription}}</span>
         </div>
     </div>
 
@@ -20,7 +14,7 @@
         <div class="h-100" nz-flex nzAlign="center" nzJustify="center" nzVertical>
             <img class="img-fluid" src="images/tech-tree.png">
             <div class="mt-3" nz-flex nzGap="small" nzWrap="wrap">
-                <nz-tag *ngFor="let t of techs" [nzColor]="t.color">{{t.name}}</nz-tag>
+                <nz-tag *ngFor="let t of techs" [nzColor]="t.color">{{t.tech.title}}</nz-tag>
             </div>
         </div>
     </div>

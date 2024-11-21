@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { REGEXPATTERNS } from '../../_constants/regex-patterns';
-import { AuthService } from '../../_services/auth.service';
+import { AppUserService } from '../../_services/app-user.service';
 import { AppUser } from '../../_models/app-user';
 import { debounceTime, filter, Subject, switchMap } from 'rxjs';
 import { NzModalService } from 'ng-zorro-antd/modal';
@@ -21,7 +21,7 @@ export class SignupComponent implements OnInit {
   userNameAlreadyExist: boolean = false;
 
   //LIFE CYCLES
-  constructor(private fb: FormBuilder, private authService: AuthService, private nzModal: NzModalService) {
+  constructor(private fb: FormBuilder, private authService: AppUserService, private nzModal: NzModalService) {
     this.initializeForm();
   }
 

@@ -1,6 +1,15 @@
-import { AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { Image } from '../_models/image';
+import { ChangeDetectorRef, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatterTs } from '../_matter/matter-ts';
+import { TechnologyService } from '../_services/technology.service';
+import { Technology } from '../_models/technology';
+import { Utility } from '../_utility/utility';
+import { AppUserService } from '../_services/app-user.service';
+import { AppUser } from '../_models/app-user';
+
+interface UserTechnologyViewModel {
+  tech: Technology,
+  color: string
+};
 
 @Component({
   selector: 'app-about',
@@ -9,73 +18,27 @@ import { MatterTs } from '../_matter/matter-ts';
 })
 export class AboutComponent implements OnInit {
   @ViewChild('matterContainer', { static: true }) matterContainer!: ElementRef;
+  colors: string[] = ["purple", "darkBlue", "red", "red", "blue", "orange", "blue", "blue", "yellow", "blue", "blue", "orange"];
+  techs: UserTechnologyViewModel[] = [];
+  appUser: AppUser;
+  firstName:string = '';
+  lastName:string = '';
 
   //LIFE CYCLES
-  constructor(private cd: ChangeDetectorRef) { }
+  constructor(private userService: AppUserService) {
+    this.appUser = userService.user!;
+    let fullName = this.appUser.name;
+    this.firstName = fullName.substring(0, this.appUser.name.indexOf(" "));
+    this.lastName = fullName.substring(this.appUser.name.indexOf(" "), fullName.length);
+  }
+
   ngOnInit(): void {
+    this.techs = this.appUser.technologies?.map((val) => <UserTechnologyViewModel>{ tech: val, color: Utility.listRandom(this.colors) })!;
     let color = '#121212';
     MatterTs.gyro(this.matterContainer.nativeElement, color);
   }
 
-  imagePaths: Image[] = [
-    { path: 'images/dotnet.png', tooltip: '.NET Core', tooltipColor: 'purple' },
-    { path: 'images/sql-server.png', tooltip: 'SQL Server', tooltipColor: 'red' },
-    { path: 'images/angular.png', tooltip: 'Angular', tooltipColor: 'rgb(207, 10, 204)' },
-    { path: 'images/ng zorro.png', tooltip: 'NG Zorro', tooltipColor: 'blue' },
-    { path: 'images/html.png', tooltip: 'HTML', tooltipColor: 'orangered' },
-    { path: 'images/css.png', tooltip: 'CSS', tooltipColor: 'blue' },
-    { path: 'images/js.png', tooltip: 'JavaScript', tooltipColor: 'rgb(196, 196, 25)' },
-    { path: 'images/flutter.png', tooltip: 'Flutter', tooltipColor: 'skyblue' },
-    { path: 'images/firebase.png', tooltip: 'Firebase', tooltipColor: 'orange' },
-  ];
-
-  techs: { name: string, color: string }[] = [
-    {
-      name: "ASP.NET Core",
-      color: "purple"
-    },
-    {
-      name: "EF Core",
-      color: "darkBlue"
-    },
-    {
-      name: "MS SQL Server",
-      color: "red"
-    },
-    {
-      name: "Angular",
-      color: "red"
-    },
-    {
-      name: "NG-Zorro",
-      color: "blue"
-    },
-    {
-      name: "Html",
-      color: "orange"
-    },
-    {
-      name: "CSS",
-      color: "blue"
-    },
-    {
-      name: "JavaScript",
-      color: "yellow"
-    },
-    {
-      name: "TypeScript",
-      color: "blue"
-    },
-    {
-      name: "Flutter",
-      color: "blue"
-    },
-    {
-      name: "Firebase",
-      color: "orange"
-    }
-  ];
-
+  //UI LOGIC
   scrollTo100vh() {
     const viewportHeight = window.innerHeight;
     window.scrollTo({ top: viewportHeight, behavior: 'smooth' });

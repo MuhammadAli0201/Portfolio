@@ -26,7 +26,7 @@ export class ProjectDisplayComponent implements OnInit {
 
   ngOnInit(): void {
     this.techs = this.project.technologies.map((val) => <TechViewModel>{
-      title: val,
+      title: val.title,
       color: this.getRandomColor()
     });
   }
