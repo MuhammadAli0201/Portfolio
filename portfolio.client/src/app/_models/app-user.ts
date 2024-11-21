@@ -3,7 +3,7 @@ import { UserTechnology } from "./user-technology";
 
 export interface AppUser
 {
-    id?:string,
+    id:string,
     userName:string,
     email:string,
     name:string,
