@@ -9,16 +9,12 @@ import { MatterTs } from '../_matter/matter-ts';
 })
 export class AboutComponent implements OnInit {
   @ViewChild('matterContainer', { static: true }) matterContainer!: ElementRef;
-  @ViewChild('techStack', { static: true }) techStack!: ElementRef;
-  displayImagesCount!: number;
-  startIndex: number = 0;
-  techImgGap: number = 40;
 
   //LIFE CYCLES
   constructor(private cd: ChangeDetectorRef) { }
   ngOnInit(): void {
-    MatterTs.gyro(this.matterContainer.nativeElement);
-    Promise.resolve().then(() => this.calculateDisplayImagesCount());
+    let color = '#121212';
+    MatterTs.gyro(this.matterContainer.nativeElement, color);
   }
 
   imagePaths: Image[] = [
@@ -79,30 +75,6 @@ export class AboutComponent implements OnInit {
       color: "orange"
     }
   ];
-
-  getVisibleImages = (): Image[] => this.imagePaths.slice(this.startIndex, this.displayImagesCount);
-  isLeftButtonVisible = (): boolean => this.startIndex > 0;
-  isRightButtonVisible = (): boolean => this.displayImagesCount < this.imagePaths.length;
-
-  calculateDisplayImagesCount = () => {
-    let techStackDiv = this.techStack.nativeElement;
-    let techStackDivWidth = techStackDiv.clientWidth;
-    let techImageHeight = techStackDiv.clientHeight;
-    this.displayImagesCount = Math.ceil(techStackDivWidth / (techImageHeight + this.techImgGap));
-  }
-
-  slideImagesToLeft() {
-    if (this.startIndex > 0) {
-      this.startIndex--;
-      this.displayImagesCount--;
-    }
-  }
-  slideImagesToRight() {
-    if (this.displayImagesCount < this.imagePaths.length) {
-      this.startIndex++;
-      this.displayImagesCount++;
-    }
-  }
 
   scrollTo100vh() {
     const viewportHeight = window.innerHeight;

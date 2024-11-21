@@ -14,24 +14,11 @@
                 technologies, enabling me to provide creative solutions that meet my clients' needs and improve user
                 experiences.</span>
         </div>
-
-        <!-- <div class="mt-5 tech-parent" nz-flex nzGap="small">
-            <span *ngIf="isLeftButtonVisible()" class="pointer-event-all" nz-icon nzType="arrow-left" nzTheme="outline"
-                (click)="slideImagesToLeft()"></span>
-
-            <div #techStack class="tech-stack" nz-flex [nzGap]="techImgGap">
-                <img class="techs pointer-event-all" *ngFor="let i of getVisibleImages()" [src]="i.path" nz-tooltip
-                    [nzTooltipTitle]="i.tooltip" [nzTooltipColor]="i.tooltipColor">
-            </div>
-
-            <span *ngIf="isRightButtonVisible()" class="pointer-event-all" nz-icon nzType="arrow-right"
-                nzTheme="outline" (click)="slideImagesToRight()"></span>
-        </div> -->
     </div>
 
     <div nz-col [nzOffset]="4" [nzXs]="0" [nzSm]="0" [nzMd]="8">
         <div class="h-100" nz-flex nzAlign="center" nzJustify="center" nzVertical>
-            <img class="img-fluid" src="images/tech-tree2.png">
+            <img class="img-fluid" src="images/tech-tree.png">
             <div class="mt-3" nz-flex nzGap="small" nzWrap="wrap">
                 <nz-tag *ngFor="let t of techs" [nzColor]="t.color">{{t.name}}</nz-tag>
             </div>

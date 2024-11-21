@@ -4,7 +4,7 @@
     align-items: center;
     height: 100vh;
     color: white;
-    z-index: 1;
+    z-index: 2;
     position: relative;
     pointer-events: none;
 }
@@ -17,13 +17,13 @@
     height: 100vh;
     z-index: 0;
     pointer-events: auto;
-    opacity: 0.6;
-    filter: grayscale(100%) brightness(40%);
+    opacity: .8;
+    filter: brightness(70%);
 }
 
 
 .h {
-    font-size: 4vw;
+    font-size: 5vw;
     font-weight: bold;
     user-select: none;
     line-height: 0px;

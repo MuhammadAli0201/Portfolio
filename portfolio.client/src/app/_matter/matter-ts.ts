@@ -13,7 +13,7 @@ import {
 } from 'matter-js';
 
 export class MatterTs {
-    static gyro(container: HTMLElement) {
+    static gyro(container: HTMLElement, bgColor:string) {
         // Create engine
         let engine = Engine.create();
         const world = engine.world;
@@ -27,10 +27,14 @@ export class MatterTs {
             element: container,
             engine: engine,
             options: {
+                background: bgColor,
+                wireframes:false,
                 width: width, // Use container width
                 height: height, // Use container height
             }
         });
+
+        // render.canvas.style.background = 'green';
 
         Render.run(render);
 
@@ -39,9 +43,9 @@ export class MatterTs {
         Runner.run(runner, engine);
 
         // Create stack of bodies
-        const stack = Composites.stack(0, 20, 20, 200, 50, 30, function (x: number, y: number) {
+        const stack = Composites.stack(0, 0, 50, 100, 30, 30, function (x: number, y: number) {
             const sides = Math.round(Common.random(1, 8));
-
+        
             // Round the edges of some bodies
             let chamfer: IChamfer | undefined = undefined;
             if (sides > 2 && Common.random() > 0.7) {
@@ -49,24 +53,51 @@ export class MatterTs {
                     radius: 10
                 };
             }
+        
+            // Function to generate more neutral/masculine colors
+            function getMasculineColor() {
+                const darkColors = [
+                    '#1C1C1C',
+                    '#2B1B1B',
+                    '#2E2A3E',
+                    '#1D2A3B',
+                    '#3B2F2F',
+                    '#3E1F2F',
+                    '#2A2A2A',
+                    '#2F2F3B',
+                    '#3E3B3B',
+                    '#29292A'
+                ];
+                
+                
+                // Select a random color from the masculine color palette
+                return darkColors[Math.floor(Common.random(0, darkColors.length))];
+            }
+        
             // Create bodies with images
             switch (Math.round(Common.random(0, 1))) {
                 case 0:
                     if (Common.random() < 0.8) {
                         const body = Bodies.rectangle(x, y, Common.random(25, 50), Common.random(25, 50), { chamfer: chamfer });
+                        body.render.fillStyle = getMasculineColor();  // Assign masculine color
                         return body;
                     } else {
                         const body = Bodies.rectangle(x, y, Common.random(80, 120), Common.random(25, 30), { chamfer: chamfer });
+                        body.render.fillStyle = getMasculineColor();  // Assign masculine color
                         return body;
                     }
                 case 1:
                     const polyBody = Bodies.polygon(x, y, sides, Common.random(25, 50), { chamfer: chamfer });
+                    polyBody.render.fillStyle = getMasculineColor();  // Assign masculine color
                     return polyBody;
                 default:
                     const defaultBody = Bodies.rectangle(x, y, Common.random(25, 50), Common.random(25, 50), { chamfer });
+                    defaultBody.render.fillStyle = getMasculineColor();  // Assign masculine color
                     return defaultBody;
             }
         });
+        
+        
 
         Composite.add(world, [
             stack,
